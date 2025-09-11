@@ -96,15 +96,13 @@ store.loadRecords()
               { label: 'Локальный', value: RecordType.Local },
             ]"
           />
-          <div class="flex flex-col gap-1">
-            <InputText
-              @input="onChangeInput(record.id)"
-              name="login"
-              fluid
-              placeholder="Введите логин"
-            />
-            <Message v-if="$form.login?.invalid" severity="error" size="small" variant="simple" />
-          </div>
+          <InputText
+            @input="onChangeInput(record.id)"
+            name="login"
+            :invalid="$form.login?.invalid"
+            fluid
+            placeholder="Введите логин"
+          />
           <Password
             v-if="$form.type?.value === RecordType.Local"
             name="password"
@@ -112,6 +110,7 @@ store.loadRecords()
             fluid
             placeholder="Введите пароль"
             :feedback="false"
+            :invalid="!!$form.password?.invalid"
             toggle-mask
           />
           <span v-else></span>
