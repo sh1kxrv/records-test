@@ -19,7 +19,9 @@ export const useRecordsStore = defineStore('records', () => {
   }
 
   function saveRecords() {
-    const parsedMarks = records.value.map((r) => getMarks(r.rawMark))
+    const parsedMarks = records.value.map((r) =>
+      getMarks(r.rawMark || r.marks.map((m) => m.text).join(';')),
+    )
     records.value.forEach((r, i) => {
       r.marks = parsedMarks[i]
       delete r.rawMark
